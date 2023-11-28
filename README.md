@@ -37,4 +37,6 @@
 ## Phân tích Database: -> [Dbdiagram](https://dbdiagram.io/d/Module_20_Laravel-656563fe3be1495787db072a)
 
 ## Cài Đặt Laravel Module và Repository
-### Cài đặt Laravel Module
+```terminal
+php artisan make:module Ten_module
+```
