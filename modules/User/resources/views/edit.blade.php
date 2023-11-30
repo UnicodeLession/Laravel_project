@@ -66,6 +66,6 @@
                 <a href="{{route('admin.users.index')}}" class="btn btn-danger">Hủy</a>
             </div>
         </div>
-
+    @method('PUT')
     </form>
 @endsection

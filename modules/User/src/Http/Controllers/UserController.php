@@ -38,7 +38,8 @@ class UserController extends Controller
                 return '<a href="'.route('admin.users.edit', $user->id).'" class="btn btn-warning btn-sm">Sửa</a>';
             })
             ->addColumn('delete', function ($user){
-                return '<a href="" class="btn btn-danger btn-sm">Xóa</a>';
+                return '<a href="'.route('admin.users.delete', $user->id).'" class="btn btn-danger btn-sm post-delete-action">Xóa</a>';
+                // post-delete-action: delete với phương thức post
             })
             ->rawColumns(['edit', 'delete'])
             ->toJson();
@@ -87,6 +88,11 @@ class UserController extends Controller
          $this->userRepo->update($id, $data);
         return back()
             ->with('msg', __('user::messages.success', ['action' => 'Cập Nhật', 'attribute' => 'Người Dùng']))
+            ->with('type', 'success');
+    }
+    public function delete($id){
+        $this->userRepo->delete($id);
+        return back()->with('msg', __('user::messages.success', ['action' => 'Xóa', 'attribute' => 'Người Dùng']))
             ->with('type', 'success');
     }
 }

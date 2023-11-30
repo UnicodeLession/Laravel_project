@@ -43,6 +43,7 @@
                         </tr>
                         </tfoot>
                     </table>
+                    @include('parts.backend.delete')
                 </div>
             </div>
         </div>
@@ -53,6 +54,7 @@
     <script src="{{asset('backend/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
     <!-- Page level custom scripts -->
     <script src="{{asset('backend/js/demo/datatables-demo.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endpush
 @section('js')
     <script>
@@ -68,6 +70,7 @@
                 {"data": "edit"},
                 {"data": "delete"},
             ],
+            order: [2, 'asc'],
             columnDefs : [
                 // tắt tính năng sort
                 { "orderable" : false, "targets": 4 },
