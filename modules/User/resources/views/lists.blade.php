@@ -32,16 +32,16 @@
                             <th width="5%">Xóa</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tfoot>
                         <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td><a href="#" class="btn btn-warning">Sửa</a></td>
-                            <td><a href="#" class="btn btn-danger">Xóa</a></td>
+                            <th>Tên</th>
+                            <th>Email</th>
+                            <th>Nhóm</th>
+                            <th>Thời Gian</th>
+                            <th width="5%">Sửa</th>
+                            <th width="5%">Xóa</th>
                         </tr>
-                        </tbody>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -54,3 +54,25 @@
     <!-- Page level custom scripts -->
     <script src="{{asset('backend/js/demo/datatables-demo.js')}}"></script>
 @endpush
+@section('js')
+    <script>
+        $('#dataTable').DataTable({
+            ajax: "{{route('admin.users.data')}}",
+            processing: true,
+            serverSide: true,
+            columns: [
+                {"data": "name"},
+                {"data": "email"},
+                {"data": "group_id"},
+                {"data": "created_at"},
+                {"data": "edit"},
+                {"data": "delete"},
+            ],
+            columnDefs : [
+                // tắt tính năng sort
+                { "orderable" : false, "targets": 4 },
+                { "orderable" : false, "targets": 5 }
+            ]
+        });
+    </script>
+@endsection

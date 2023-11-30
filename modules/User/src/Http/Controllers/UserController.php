@@ -6,6 +6,8 @@ use Modules\User\src\Http\Requests\UserRequest;
 use Modules\User\src\Models\User;
 use App\Http\Controllers\Controller;
 use Modules\User\src\Repositories\UserRepository;
+use Yajra\DataTables\DataTables;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -23,7 +25,24 @@ class UserController extends Controller
         $check = $this->userRepo->checkPassword('11111', 1);
         return view('user::lists', compact('pageTitle'));
     }
-
+    function data()
+    {
+        $users = $this->userRepo->getAllUsers();
+        return DataTables::of($users)
+            ->editColumn(
+                'created_at', function($user){
+                    return Carbon::parse($user->created_at)->format('H:i:s  d/m/Y');
+                }
+            )
+            ->addColumn('edit', function ($user){
+                return '<a href="" class="btn btn-warning btn-sm">Sửa</a>';
+            })
+            ->addColumn('delete', function ($user){
+                return '<a href="" class="btn btn-danger btn-sm">Xóa</a>';
+            })
+            ->rawColumns(['edit', 'delete'])
+            ->toJson();
+    }
     public function detail($id)
     {
         return view('user::detail', compact('id'));

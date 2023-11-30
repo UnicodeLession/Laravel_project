@@ -50,5 +50,7 @@
 <!-- Custom scripts for all pages-->
 <script src="{{asset('backend/js/sb-admin-2.min.js')}}"></script>
 @stack('js')
+<script src="{{asset('backend/js/custom.js')}}"></script>
+@yield('js')
 </body>
 </html>
