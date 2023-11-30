@@ -1,5 +1,5 @@
 <?php
-namespace App\Repositories; 
+namespace App\Repositories;
 
 use App\Repositories\RepositoryInterface;
 
@@ -33,7 +33,7 @@ abstract class BaseRepository implements RepositoryInterface
     public function update($id, $attributes = []){
         $result = $this->model->find($id);
         if ($result){
-            return $result->update($id, $attributes);
+            return $result->update($attributes);
         }
 
         return false;

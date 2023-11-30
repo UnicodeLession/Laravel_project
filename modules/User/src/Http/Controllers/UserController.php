@@ -35,7 +35,7 @@ class UserController extends Controller
                 }
             )
             ->addColumn('edit', function ($user){
-                return '<a href="" class="btn btn-warning btn-sm">Sửa</a>';
+                return '<a href="'.route('admin.users.edit', $user->id).'" class="btn btn-warning btn-sm">Sửa</a>';
             })
             ->addColumn('delete', function ($user){
                 return '<a href="" class="btn btn-danger btn-sm">Xóa</a>';
@@ -65,10 +65,28 @@ class UserController extends Controller
                 __('user::messages.success',
                     [
                         'action' => 'Thêm',
-                        'attribute' => 'người dùng'
+                        'attribute' => 'Người Dùng'
                     ]
                 )
             )
+            ->with('type', 'success');
+    }
+    public function edit($id){
+        $user = $this->userRepo->find($id);
+        if(!$user) {
+            abort(404);
+        }
+        $pageTitle = "Cập Nhật Người Dùng";
+        return view('user::edit', compact('pageTitle', 'user'));
+    }
+    public function update($id, UserRequest $request){
+        $data = $request->except('_token', 'password'); // bỏ password bên trong data chứ bên request vẫn còn
+        if($request->password){
+            $data['password'] = bcrypt($request->password);
+        }
+         $this->userRepo->update($id, $data);
+        return back()
+            ->with('msg', __('user::messages.success', ['action' => 'Cập Nhật', 'attribute' => 'Người Dùng']))
             ->with('type', 'success');
     }
 }
