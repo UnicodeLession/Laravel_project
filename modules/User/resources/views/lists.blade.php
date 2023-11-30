@@ -4,6 +4,13 @@
 @endpush
 @section('content')
     <div class="container-fluid">
+        <div>
+            @if(session('msg'))
+                <div class="alert alert-{{session('type')}} text-center">
+                    {{session('msg')}}
+                </div>
+            @endif
+        </div>
         <div class="mb-3">
             <a href="{{route('admin.users.create')}}" class="btn btn-primary">Thêm mới</a>
         </div>

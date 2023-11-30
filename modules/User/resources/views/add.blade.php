@@ -1,5 +1,8 @@
 @extends('layouts.backend')
 @section('content')
+    @if($errors->any())
+        <div class="alert-danger alert text-center">Vui Lòng Kiểm Tra Lại Dữ Liệu Đã Nhập</div>
+    @endif
     <form action="" method="post">
         @csrf
         <div class="row">
@@ -34,6 +37,7 @@
                     <label for="">Nhóm</label>
                     <select name="group_id" class="form-control @error('group_id') is-invalid @enderror">
                         <option value="0">Chọn Nhóm</option>
+                        <option value="1">Administrator</option>
                     </select>
                     @error('group_id')
                     <span class="invalid-feedback" role="alert">

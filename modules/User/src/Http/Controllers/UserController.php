@@ -35,6 +35,21 @@ class UserController extends Controller
         return view('user::add', compact('pageTitle'));
     }
     public function store(UserRequest $request){
-
+        $this->userRepo->create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'group_id' => $request->group_id,
+        ]);
+        return redirect()->route('admin.users.index')
+            ->with('msg',
+                __('user::messages.success',
+                    [
+                        'action' => 'Thêm',
+                        'attribute' => 'người dùng'
+                    ]
+                )
+            )
+            ->with('type', 'success');
     }
 }
