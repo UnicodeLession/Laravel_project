@@ -63,7 +63,7 @@ class UserController extends Controller
         ]);
         return redirect()->route('admin.users.index')
             ->with('msg',
-                __('user::messages.success',
+                __('messages.success',
                     [
                         'action' => 'Thêm',
                         'attribute' => 'Người Dùng'
@@ -87,12 +87,12 @@ class UserController extends Controller
         }
          $this->userRepo->update($id, $data);
         return back()
-            ->with('msg', __('user::messages.success', ['action' => 'Cập Nhật', 'attribute' => 'Người Dùng']))
+            ->with('msg', __('messages.success', ['action' => 'Cập Nhật', 'attribute' => 'Người Dùng']))
             ->with('type', 'success');
     }
     public function delete($id){
         $this->userRepo->delete($id);
-        return back()->with('msg', __('user::messages.success', ['action' => 'Xóa', 'attribute' => 'Người Dùng']))
+        return back()->with('msg', __('messages.success', ['action' => 'Xóa', 'attribute' => 'Người Dùng']))
             ->with('type', 'success');
     }
 }
