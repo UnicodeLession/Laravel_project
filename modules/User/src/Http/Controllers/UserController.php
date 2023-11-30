@@ -2,6 +2,7 @@
 
 namespace Modules\User\src\Http\Controllers;
 
+use Modules\User\src\Http\Requests\UserRequest;
 use Modules\User\src\Models\User;
 use App\Http\Controllers\Controller;
 use Modules\User\src\Repositories\UserRepository;
@@ -17,9 +18,10 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = $this->userRepo->getUsers(2);
-
-        return view('user::lists');
+        $users = $this->userRepo->getUsers(5);
+        $pageTitle = 'Danh Sách Người Dùng';
+        $check = $this->userRepo->checkPassword('11111', 1);
+        return view('user::lists', compact('pageTitle'));
     }
 
     public function detail($id)
@@ -29,9 +31,10 @@ class UserController extends Controller
 
     public function create()
     {
-        $user = new User();
-        $user->name = 'Hoàng An';
-        $user->email = 'hoan.ng@gmail.com';
-        $user->save();
+        $pageTitle = "Thêm Người Dùng";
+        return view('user::add', compact('pageTitle'));
+    }
+    public function store(UserRequest $request){
+
     }
 }
