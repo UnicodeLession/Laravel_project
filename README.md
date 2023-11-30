@@ -1,5 +1,7 @@
 # Project End Laravel lesson online.unicode module 20
 
+## Khi Clone Project về thì phải tải về [file này](https://www.mediafire.com/file/go1sfwpnepgfmy6/public_backend.zip/file) rồi ném vào public/
+
 ## Phân tích cơ bản
 ### Dành cho người dùng:
 - Hiển thị danh sách khóa học
@@ -40,3 +42,8 @@
 ```terminal
 php artisan make:module Ten_module
 ```
+## Các chức năng trong Trang Administrator
+### User:
+- Phân Trang
+- Thêm, Sửa, Xóa
+

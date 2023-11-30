@@ -8,7 +8,7 @@ use Modules\User\src\Commands\TestCommand;
 use Modules\User\src\Repositories\UserRepository;
 use Modules\User\src\Http\Middlewares\DemoMiddleware;
 
-class ModuleServiceProvider extends ServiceProvider
+class  ModuleServiceProvider extends ServiceProvider
 {
     private $middlewares = [
         'demo' => DemoMiddleware::class
