@@ -20,6 +20,6 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
 
     public function getAllCategories()
     {
-        return $this->getCategories()->get();
+        return $this->getAll();
     }
 }

@@ -60,6 +60,7 @@
             ajax: "{{route('admin.categories.data')}}",
             processing: true,
             serverSide: true,
+            pageLength: 2,
             columns: [
                 {"data": "name"}, // 0
                 {"data": "created_at"}, // 1
