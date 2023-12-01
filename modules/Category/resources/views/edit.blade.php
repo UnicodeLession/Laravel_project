@@ -41,11 +41,10 @@
             </div>
             <div class="col-6">
                 <div class="mb-3">
-                    <label for="">Catogory Cha</label>
+                    <label for="">Category Cha</label>
                     <select name="parent_id" class="form-control @error('parent_id') is-invalid @enderror">
                         <option value="0">Chọn Nhóm</option>
-                        <option value="1">Tiếng Anh</option>
-                        <option value="2">Toán</option>
+                        {{getCategories($categories, old('parent_id')??$category->parent_id )}}
                     </select>
                     @error('parent_id')
                     <span class="invalid-feedback" role="alert">

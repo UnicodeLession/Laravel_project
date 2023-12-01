@@ -21,7 +21,7 @@ class CategoryController extends Controller{
         return view('category::lists', compact('pageTitle'));
     }
     public function data(){
-        $categories = $this->categoryRepo->getCatrgories();
+        $categories = $this->categoryRepo->getCategories();
         return DataTables::of($categories)
             ->editColumn(
                 'created_at', function($category){
@@ -43,7 +43,8 @@ class CategoryController extends Controller{
     }
     public function create(){
         $pageTitle = "Thêm Danh Mục";
-        return view('category::add', compact('pageTitle'));
+        $categories = $this->categoryRepo->getAllCategories();
+        return view('category::add', compact('pageTitle','categories'));
     }
     public function store(CategoryRequest $request){
         $this->categoryRepo->create([
@@ -64,11 +65,12 @@ class CategoryController extends Controller{
     }
     public function edit($id){
         $category = $this->categoryRepo->find($id);
+        $categories = $this->categoryRepo->getAllCategories();
         if(!$category) {
             abort(404);
         }
         $pageTitle = "Cập Nhật Danh Mục";
-        return view('category::edit', compact('pageTitle', 'category'));
+        return view('category::edit', compact('pageTitle','categories','category'));
     }
     public function update($id, CategoryRequest $request){
         $data = $request->except('_token');
