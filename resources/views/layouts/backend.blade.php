@@ -18,6 +18,7 @@
     <!-- Custom styles for this template-->
     <link href="{{asset('backend/css/sb-admin-2.min.css')}}" rel="stylesheet">
     @stack('css')
+    @yield('stylesheets')
 </head>
 
 <body id="page-top">
@@ -51,6 +52,6 @@
 <script src="{{asset('backend/js/sb-admin-2.min.js')}}"></script>
 @stack('js')
 <script src="{{asset('backend/js/custom.js')}}"></script>
-@yield('js')
+@yield('scripts')
 </body>
 </html>
