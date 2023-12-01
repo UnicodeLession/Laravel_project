@@ -67,13 +67,18 @@
                 {"data": "edit"}, // 3
                 {"data": "delete"}, // 4
             ],
-            order: [0, 'asc'],
+            order: [1, 'desc'],
             columnDefs : [
                 // tắt tính năng sort
                 { "orderable" : false, "targets": 2 },
                 { "orderable" : false, "targets": 3 },
                 { "orderable" : false, "targets": 4 }
-            ]
+            ],
+            language: {
+                "zeroRecords": function () {
+                    return '<div style="margin-bottom: 0;" class="alert alert-danger text-center">No matching records found</div>'
+                },
+            }
         });
     </script>
 @endsection

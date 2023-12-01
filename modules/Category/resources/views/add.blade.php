@@ -9,7 +9,7 @@
             <div class="col-6">
                 <div class="mb-3">
                     <label for="">Tên</label>
-                    <input id="name" name="name" type="text" class="form-control
+                    <input id="title" name="name" type="text" class="form-control
                     @error('name') is-invalid @enderror"
                            value="{{ old('name') }}" autofocus placeholder="Tiêu Đề...">
                     @error('name')
@@ -20,11 +20,14 @@
                 </div>
             </div>
             <div class="col-6">
-                <div class="mb-3">
-                    <label for="">Đường Dẫn Tĩnh</label>
+                <label for="">Đường Dẫn Tĩnh</label>
+                <div class="mb-3 input-group">
                     <input id="slug" name="slug" type="text"
                            class="form-control @error('slug') is-invalid @enderror" value="{{ old('slug') }}"
-                           autofocus placeholder="Slug...">
+                           autofocus placeholder="Đường dẫn tĩnh..."
+                    >
+                    <button style="border-left: 0; border-radius: 0 10px 10px 0; border-color: #BAC8F3;"
+                            id="btn-slug" class="btn btn-outline-secondary" type="button">Title</button>
                     @error('slug')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
