@@ -1,3 +1,4 @@
+
 // const deleteAction = document.querySelectorAll('.post-delete-action');
 const tableList = document.querySelector('#dataTable')
 const deleteForm = document.querySelector('#delete-form');
@@ -84,7 +85,12 @@ if (slug){
     })
 }
 ClassicEditor
-    .create( document.querySelector( '#editor' ) )
+    .create( document.querySelector( '#editor' ), {
+        
+    })
+    .then( editor => {
+        console.log(editor)
+    })
     .catch( error => {
         console.error( error );
     } );

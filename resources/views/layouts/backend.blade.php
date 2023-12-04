@@ -52,7 +52,7 @@
 <script src="{{asset('backend/js/sb-admin-2.min.js')}}"></script>
 <script src="{{asset('backend/plugins/ckeditor5/build/ckeditor.js')}}"></script>
 @stack('js')
-<script src="{{asset('backend/js/custom.js')}}"></script>
+<script type="module"  src="{{asset('backend/js/custom.js')}}"></script>
 @yield('scripts')
 </body>
 </html>
