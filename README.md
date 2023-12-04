@@ -1,5 +1,9 @@
 # Project End Laravel lesson online.unicode module 20
 
+## về branch:
+### master: branch gốc: chưa tích hợp CKEditor do chưa render ảnh khi thêm vào content trong textarea cùng với thiếu 1 icon để lấy ảnh trên laravel file manager serve
+### fix-ckeditor-5: branch lỗi chưa fix điều kiện trên, khi nào fix xong thì merge vào master
+
 ## Khi Clone Project về thì phải tải về [file này](https://www.mediafire.com/file/go1sfwpnepgfmy6/public_backend.zip/file) rồi ném vào public/
 
 ## Phân tích cơ bản

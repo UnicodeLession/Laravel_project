@@ -53,30 +53,35 @@ const getSlug = (title) => {
 
 // input name: #title
 // input slug: #slug
-const title = document.querySelector('#title');
 const slug = document.querySelector('#slug');
-const btnSlug = document.querySelector('#btn-slug')
-let isChangeSlug = false; // nếu đã sửa cái slug rồi thì sẽ theo cái slug đã sửa ấy chứ không theo title
-if (btnSlug){
-    btnSlug.addEventListener('click', (e) =>{
-        slug.value = getSlug(title.value)
-    })
-}
-if (slug.value === ""){
-    // chỉ tự thay đổi theo title khi đang ở create
-    title.addEventListener("keyup", (e) => {
-       if (!isChangeSlug){
-           const titleValue = e.target.value;
-           slug.value = getSlug(titleValue)
-       }
-    })
-
-}
-slug.addEventListener('change', (e) => {
-    if (slug.value === ""){
-        const title = document.querySelector('#title');
-        const titleValue = title.value;
-        slug.value = getSlug(titleValue);
+if(slug){
+    const title = document.querySelector('#title');
+    const btnSlug = document.querySelector('#btn-slug')
+    let isChangeSlug = false; // nếu đã sửa cái slug rồi thì sẽ theo cái slug đã sửa ấy chứ không theo title
+    if (btnSlug){
+        btnSlug.addEventListener('click', (e) =>{
+            slug.value = getSlug(title.value)
+        })
     }
-    isChangeSlug = true;
-})
+    if (slug.value === ""){
+        // chỉ tự thay đổi theo title khi đang ở create
+        title.addEventListener("keyup", (e) => {
+            if (!isChangeSlug){
+                const titleValue = e.target.value;
+                slug.value = getSlug(titleValue)
+            }
+        })
+
+    }
+    slug.addEventListener('change', (e) => {
+        if (slug.value === ""){
+            const title = document.querySelector('#title');
+            const titleValue = title.value;
+            slug.value = getSlug(titleValue);
+        }
+        isChangeSlug = true;
+    })
+}
+
+https://unisharp.github.io/laravel-filemanager/integration#standalone-button
+$('#lfm').filemanager('image');

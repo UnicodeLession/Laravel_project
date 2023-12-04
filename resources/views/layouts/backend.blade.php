@@ -50,6 +50,7 @@
 <script src="{{asset('backend/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
 <!-- Custom scripts for all pages-->
 <script src="{{asset('backend/js/sb-admin-2.min.js')}}"></script>
+<script src="{{asset('vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>
 @stack('js')
 <script src="{{asset('backend/js/custom.js')}}"></script>
 @yield('scripts')
