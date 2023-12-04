@@ -84,13 +84,19 @@ if (slug){
         isChangeSlug = true;
     })
 }
-ClassicEditor
-    .create( document.querySelector( '#editor' ), {
-        
+let textareaList = document.querySelectorAll('.editor');
+if (textareaList !== null){
+    textareaList.forEach((item, index)=>{
+        item.id = 'editor_'+(index+1);
+        ClassicEditor
+            .create( document.querySelector( '#'+item.id ), {
+
+            })
+            .catch( error => {
+                console.error( error );
+            } );
     })
-    .then( editor => {
-        console.log(editor)
-    })
-    .catch( error => {
-        console.error( error );
-    } );
+}
+
+// file manager: https://unisharp.github.io/laravel-filemanager/integration#standalone-button
+$('#lfm').filemanager('image');

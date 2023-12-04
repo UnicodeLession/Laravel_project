@@ -114,10 +114,10 @@
                 </div>
             </div>
 
-            <div class="col-12">
+            <div class="col-6">
                 <div class="mb-3">
                     <label for="">Hỗ trợ</label>
-                    <textarea name="supports" class="form-control {{ $errors->has('supports') ? 'is-invalid' : '' }}"
+                    <textarea name="supports" class="editor form-control {{ $errors->has('supports') ? 'is-invalid' : '' }}"
                               placeholder="Hỗ trợ..."></textarea>
                     @error('supports')
                     <div class="invalid-feedback">
@@ -126,12 +126,38 @@
                     @enderror
                 </div>
             </div>
+            <div class="col-6">
+                <div class="mb-3">
+                    <div class="row align-items-end input-group">
+                        <div class="col-10">
+                            <label for="">Ảnh đại diện</label>
+                            <input id="thumbnail" type="text" name="thumbnail"
+                                   class="form-control {{ $errors->has('thumbnail') ? 'is-invalid' : '' }}"
+                                   placeholder="Ảnh đại diện...">
+                            @error('thumbnail')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="col-2 d-grid input-group-btn">
+                            <button type="button" class="btn btn-primary"
+                                    id="lfm" data-input="thumbnail" data-preview="holder">
+                                Chọn ảnh
+                            </button>
+                        </div>
+                        {{--                        https://mdbootstrap.com/docs/standard/extended/file-input-image/--}}
+                    </div>
+                </div>
+                <div id="holder"></div>
 
+            </div>
             <div class="col-12">
                 <div class="mb-3">
                     <label for="">Nội dung</label>
                     <textarea id="editor" name="detail" class="editor form-control {{ $errors->has('detail') ? 'is-invalid' : '' }}"
-                              placeholder="Nội dung..."></textarea>
+                              placeholder="Nội dung...">
+                    </textarea>
                     @error('detail')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -140,33 +166,6 @@
                 </div>
             </div>
 
-            <div class="col-12">
-                <div class="mb-3">
-                    <div class="row align-items-end">
-                        <div class="col-7">
-                            <label for="">Ảnh đại diện</label>
-                            <input type="text" name="thumbnail"
-                                   class="form-control {{ $errors->has('thumbnail') ? 'is-invalid' : '' }}"
-                                   placeholder="Ảnh đại diện..." id="">
-                            @error('thumbnail')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                            @enderror
-                        </div>
-                        <div class="col-2 d-grid">
-                            <button type="button" class="btn btn-primary">
-                                Chọn ảnh
-                            </button>
-                        </div>
-{{--                        https://mdbootstrap.com/docs/standard/extended/file-input-image/--}}
-                        <div class="col-3">
-                            <img src="https://fastly.picsum.photos/id/866/1000/600.jpg?hmac=An7fELfe7MSZ868dqoFWXa4ZpYsxHrR4pjHsyvDtLJI"
-                                 alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <div class="col-12">
                 <button type="submit" class="btn btn-primary">Lưu lại</button>
@@ -181,7 +180,11 @@
     <style>
         img {
             max-width: 100%;
-            height: auto;
+            height: auto !important;
+        }
+        #holder img {
+            height: 300px !important;
+            width: auto !important;
         }
     </style>
 @endsection

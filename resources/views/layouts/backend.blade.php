@@ -51,6 +51,7 @@
 <!-- Custom scripts for all pages-->
 <script src="{{asset('backend/js/sb-admin-2.min.js')}}"></script>
 <script src="{{asset('backend/plugins/ckeditor5/build/ckeditor.js')}}"></script>
+<script src="{{asset('vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>
 @stack('js')
 <script type="module"  src="{{asset('backend/js/custom.js')}}"></script>
 @yield('scripts')
