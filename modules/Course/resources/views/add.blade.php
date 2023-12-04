@@ -130,7 +130,7 @@
             <div class="col-12">
                 <div class="mb-3">
                     <label for="">Nội dung</label>
-                    <textarea name="detail" class="form-control {{ $errors->has('detail') ? 'is-invalid' : '' }}"
+                    <textarea id="editor" name="detail" class="editor form-control {{ $errors->has('detail') ? 'is-invalid' : '' }}"
                               placeholder="Nội dung..."></textarea>
                     @error('detail')
                     <div class="invalid-feedback">
