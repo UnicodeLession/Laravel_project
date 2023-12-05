@@ -38,7 +38,7 @@ class UserController extends Controller
                 return '<a href="'.route('admin.users.edit', $user->id).'" class="btn btn-warning btn-sm">Sửa</a>';
             })
             ->addColumn('delete', function ($user){
-                return '<a href="'.route('admin.users.delete', $user->id).'" class="btn btn-danger btn-sm post-delete-action">Xóa</a>';
+                return '<a href="'.route('admin.users.delete', $user->id).'" class="btn btn-danger btn-sm delete-action">Xóa</a>';
                 // post-delete-action: delete với phương thức post
             })
             ->rawColumns(['edit', 'delete'])

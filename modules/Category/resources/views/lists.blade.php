@@ -54,7 +54,7 @@
     <script src="{{asset('backend/js/demo/datatables-demo.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endpush
-@section('js')
+@section('scripts')
     <script>
         $('#dataTable').DataTable({
             ajax: "{{route('admin.categories.data')}}",
