@@ -19,33 +19,42 @@ class CourseRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules()
     {
-        $id = $this->route()->user;
-        // check xem có phải là update dữ liệu hay là thêm
-        // nếu update thì phải tránh báo lỗi khi trùng với chính nó:  `unique:users,email,'.$user->id`
         $rules = [
             'name' => 'required|max:255',
             'slug' => 'required|max:255',
-            'parent_id' => ['required','integer']
+            'detail' => 'required',
+            'teacher_id' => ['required', 'integer', function ($attribute, $value, $fail) {
+                if ($value==0) {
+                    $fail(__('course::validation.select'));
+                }
+            }],
+            'thumbnail' => 'required|max:255',
+            'code' => 'required|max:255|unique:courses,code',
+            'is_document' => 'required|integer',
+            'supports' => 'required',
+            'status' => 'required|integer',
+
         ];
+
         return $rules;
     }
 
-    public function messages(): array
+    public function messages()
     {
         return [
-            'required' => __('category::validation.required'),
-            'integer' => __('category::validation.integer')
+            'required' => __('course::validation.required'),
+            'email' => __('course::validation.email'),
+            'unique' => __('course::validation.unique'),
+            'min' => __('course::validation.min'),
+            'max' => __('course::validation.max'),
+            'integer' => __('course::validation.integer')
         ];
     }
 
-    function attributes()
+    public function attributes()
     {
-        return [
-            'name' => __('category::validation.attributes.name'),
-            'slug' => __('category::validation.attributes.slug'),
-            'parent_id' => __('category::validation.attributes.parent_id'),
-        ];
+        return __('course::validation.attributes');
     }
 }

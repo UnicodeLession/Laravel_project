@@ -3,7 +3,7 @@ const tableList = document.querySelector('#dataTable')
 const deleteForm = document.querySelector('#delete-form');
 if (tableList){
     tableList.addEventListener('click', (e)=>{
-        if(e.target.classList.contains('post-delete-action')){
+        if(e.target.classList.contains('delete-action')){
             e.preventDefault();
             Swal.fire({
                 title: "Are you sure?",
@@ -82,6 +82,5 @@ if(slug){
         isChangeSlug = true;
     })
 }
-
-https://unisharp.github.io/laravel-filemanager/integration#standalone-button
+//unisharp.github.io/laravel-filemanager/integration#standalone-button
 $('#lfm').filemanager('image');

@@ -37,7 +37,23 @@ class CourseController extends Controller
             ->editColumn('created_at', function ($course) {
                 return Carbon::parse($course->created_at)->format('d/m/Y H:i:s');
             })
-            ->rawColumns(['edit', 'delete'])
+            ->editColumn('status', function ($course) {
+                return $course->status == 1 ? '<button class="btn btn-success">Ra mắt</button>' : '<button class="btn btn-warning">Chưa ra mắt</button>';
+            })
+            ->editColumn('price', function ($course) {
+                if ($course->price) {
+                    if ($course->sale_price) {
+                        $price = number_format($course->sale_price).',000 VND';
+                    } else {
+                        $price = number_format($course->price).',000 VND';
+                    }
+                } else {
+                    $price = 'Miễn phí';
+                }
+
+                return $price;
+            })
+            ->rawColumns(['edit', 'delete', 'status'])
             ->toJson();
         return $data;
     }
@@ -50,6 +66,27 @@ class CourseController extends Controller
 
     public function store(CourseRequest $request)
     {
+        $courses = $request->except(['_token']);
+        if (!$courses['sale_price']) {
+            $courses['sale_price'] = 0;
+        }
+
+        if (!$courses['price']) {
+            $courses['price'] = 0;
+        }
+
+        $this->courseRepo->create($courses);
+
+        return redirect()->route('admin.courses.index')
+            ->with('msg',
+                __('messages.success',
+                    [
+                        'action' => 'Thêm',
+                        'attribute' => 'Khóa Học'
+                    ]
+                )
+            )
+            ->with('type', 'success');
     }
 
     public function edit($id)
@@ -64,6 +101,19 @@ class CourseController extends Controller
 
     public function update(CourseRequest $request, $id)
     {
+        $courses = $request->except(['_token', '_method']);
+        if (!$courses['sale_price']) {
+            $courses['sale_price'] = 0;
+        }
+
+        if (!$courses['price']) {
+            $courses['price'] = 0;
+        }
+
+        $this->courseRepo->update($id, $courses);
+        return back()
+            ->with('msg', __('messages.success', ['action' => 'Cập Nhật', 'attribute' => 'Khóa Học']))
+            ->with('type', 'success');
     }
 
     public function delete($id)
