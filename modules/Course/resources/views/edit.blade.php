@@ -125,11 +125,24 @@
                     @enderror
                 </div>
             </div>
-
-            <div class="col-12">
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="">Danh Mục</label>
+                    <div class="list-group list-categories {{ $errors->has('categories') ? 'is-invalid' : '' }}">
+                        {{getCategoriesCheckboxes($categories, old('categories')??$categoryIds)}}
+                    </div>
+                    @error('categories')
+                    <div class="invalid-feedback d-block">
+                        <strong>{{ $message }}</strong>
+                    </div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-6">
                 <div class="mb-3">
                     <label for="">Hỗ trợ</label>
                     <textarea name="supports" class="form-control {{ $errors->has('supports') ? 'is-invalid' : '' }}"
+                              style="height: 170px;"
                               placeholder="Hỗ trợ...">{{ old('supports')  ?? $course->detail}}</textarea>
                     @error('supports')
                     <div class="invalid-feedback">
@@ -200,6 +213,10 @@
 
         #holder img {
             width: 100% !important;
+        }
+        .list-categories{
+            max-height: 170px;
+            overflow: auto;
         }
     </style>
 @endsection

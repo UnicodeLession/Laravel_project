@@ -29,4 +29,11 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
          * timestamp bên trong
         */
     }
+    public function updateCourseCategories($course, $data =[]){
+        return $course->categories()->sync($data);
+    }
+    public function getRelatedCategories($course){
+        $categoryIds = $course->categories()->allRelatedIds()->toArray();
+        return $categoryIds;
+    }
 }

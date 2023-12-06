@@ -60,6 +60,16 @@ class CourseController extends Controller
             ->toJson();
         return $data;
     }
+    public function getCategories($courseData){
+        $categories =[];
+        foreach ($courseData['categories'] as $category) {
+            $categories[$category] = [
+                'created_at' =>Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ];
+        }
+        return $categories;
+    }
 
     public function create()
     {
@@ -79,13 +89,9 @@ class CourseController extends Controller
             $courseData['price'] = 0;
         }
         $course = $this->courseRepo->create($courseData);
-        $categories =[];
-        foreach ($courseData['categories'] as $category) {
-            $categories[$category] = [
-                'created_at' =>Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-            ];
-        }
+
+        $categories = $this->getCategories($courseData);
+
         $this->courseRepo->createCourseCategories($course, $categories);
         return redirect()->route('admin.courses.index')
             ->with('msg',
@@ -102,25 +108,28 @@ class CourseController extends Controller
     public function edit($id)
     {
         $course = $this->courseRepo->find($id);
+        $categoryIds = $this->courseRepo->getRelatedCategories($course);
+        $categories = $this->categoryRepo->getAllCategories();
         if (!$course) {
             abort(404);
         }
         $pageTitle = 'Cập nhật khóa học';
-        return view('course::edit', compact('course', 'pageTitle'));
+        return view('course::edit', compact('categoryIds','course', 'pageTitle', 'categories'));
     }
 
     public function update(CourseRequest $request, $id)
     {
-        $courses = $request->except(['_token', '_method']);
-        if (!$courses['sale_price']) {
-            $courses['sale_price'] = 0;
+        $courseData = $request->except(['_token', '_method']);
+        if (!$courseData['sale_price']) {
+            $courseData['sale_price'] = 0;
         }
-
-        if (!$courses['price']) {
-            $courses['price'] = 0;
+        if (!$courseData['price']) {
+            $courseData['price'] = 0;
         }
-
-        $this->courseRepo->update($id, $courses);
+        $this->courseRepo->update($id, $courseData); // update sẽ trả về bool
+        $course = $this->courseRepo->find($id);
+        $categories = $this->getCategories($courseData);
+        $this->courseRepo->updateCourseCategories($course, $categories);
         return back()
             ->with('msg', __('messages.success', ['action' => 'Cập Nhật', 'attribute' => 'Khóa Học']))
             ->with('type', 'success');

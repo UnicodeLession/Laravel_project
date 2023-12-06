@@ -123,7 +123,7 @@
                 <div class="mb-3">
                     <label for="">Danh Mục</label>
                     <div class="list-group list-categories {{ $errors->has('categories') ? 'is-invalid' : '' }}">
-                        {{getCategoriesCheckboxes($categories)}}
+                        {{getCategoriesCheckboxes($categories, old('categories'))}}
                     </div>
                     @error('categories')
                     <div class="invalid-feedback d-block">
@@ -136,7 +136,7 @@
                 <div class="mb-3">
                     <label for="">Hỗ trợ</label>
                     <textarea name="supports" class="form-control {{ $errors->has('supports') ? 'is-invalid' : '' }}"
-                              style="height: 222px;"
+                              style="height: 170px;"
                               placeholder="Hỗ trợ...">{{ old('supports') }}</textarea>
                     @error('supports')
                     <div class="invalid-feedback">
@@ -209,7 +209,7 @@
             width: 100% !important;
         }
         .list-categories{
-            max-height: 222px;
+            max-height: 170px;
             overflow: auto;
         }
     </style>

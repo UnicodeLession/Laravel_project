@@ -21,6 +21,7 @@ class CourseRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->route()->course;
         $rules = [
             'name' => 'required|max:255',
             'slug' => 'required|max:255',
@@ -37,7 +38,9 @@ class CourseRequest extends FormRequest
             'status' => 'required|integer',
             'categories' => 'required'
         ];
-
+        if (!empty($id)){
+            $rules['code'] = 'required|max:255|unique:courses,code,'.$id;
+        }
         return $rules;
     }
 
