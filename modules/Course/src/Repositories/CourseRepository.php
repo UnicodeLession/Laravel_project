@@ -18,4 +18,15 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
     {
         return $this->model->select(['id', 'name', 'price', 'status', 'created_at']);
     }
+    public function createCourseCategories($course, $data =[]){
+        return $course->categories()->attach($data);
+        /**
+            $data =[
+                 2=> ['created_at'=>date('Y-m-d H:i:s'), 'updated_at'=>date('Y-m-d H:i:s')],
+                 22=> ['created_at'=>date('Y-m-d H:i:s'), 'updated_at'=>date('Y-m-d H:i:s')],
+            ]
+         * ở đây: 2 và 22 là category_id
+         * timestamp bên trong
+        */
+    }
 }

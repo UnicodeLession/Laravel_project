@@ -4,6 +4,7 @@ namespace Modules\Course\src\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
+use Modules\Category\src\Repositories\CategoryRepository;
 use Yajra\DataTables\Facades\DataTables;
 use Modules\Course\src\Http\Requests\CourseRequest;
 use Modules\Course\src\Repositories\CourseRepository;
@@ -11,10 +12,12 @@ use Modules\Course\src\Repositories\CourseRepository;
 class CourseController extends Controller
 {
     protected $courseRepo;
+    protected $categoryRepo;
 
-    public function __construct(CourseRepository $courseRepo)
+    public function __construct(CourseRepository $courseRepo, CategoryRepository $categoryRepo)
     {
         $this->courseRepo = $courseRepo;
+        $this->categoryRepo =$categoryRepo;
     }
     public function index()
     {
@@ -61,22 +64,29 @@ class CourseController extends Controller
     public function create()
     {
         $pageTitle = 'Thêm Khóa Học';
-        return view('course::add', compact('pageTitle'));
+        $categories = $this->categoryRepo->getAllCategories();
+        return view('course::add', compact('pageTitle', 'categories'));
     }
 
     public function store(CourseRequest $request)
     {
-        $courses = $request->except(['_token']);
-        if (!$courses['sale_price']) {
-            $courses['sale_price'] = 0;
+        $courseData = $request->except(['_token']);
+        if (!$courseData['sale_price']) {
+            $courseData['sale_price'] = 0;
         }
 
-        if (!$courses['price']) {
-            $courses['price'] = 0;
+        if (!$courseData['price']) {
+            $courseData['price'] = 0;
         }
-
-        $this->courseRepo->create($courses);
-
+        $course = $this->courseRepo->create($courseData);
+        $categories =[];
+        foreach ($courseData['categories'] as $category) {
+            $categories[$category] = [
+                'created_at' =>Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ];
+        }
+        $this->courseRepo->createCourseCategories($course, $categories);
         return redirect()->route('admin.courses.index')
             ->with('msg',
                 __('messages.success',

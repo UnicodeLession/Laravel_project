@@ -43,7 +43,7 @@
                     </select>
                     @error('teacher_id')
                     <div class="invalid-feedback">
-                        {{ $message }}
+                        <strong>{{ $message }}</strong>
                     </div>
                     @enderror
                 </div>
@@ -55,7 +55,7 @@
                            placeholder="Mã khóa học..." id="" value="{{ old('code') }}">
                     @error('code')
                     <div class="invalid-feedback">
-                        {{ $message }}
+                        <strong>{{ $message }}</strong>
                     </div>
                     @enderror
                 </div>
@@ -69,7 +69,7 @@
                     <span class="input-group-text" style="border-left: 0; border-radius: 0 10px 10px 0; border-color: #BAC8F3;">.000 VND</span>
                     @error('price')
                     <div class="invalid-feedback">
-                        {{ $message }}
+                        <strong>{{ $message }}</strong>
                     </div>
                     @enderror
                 </div>
@@ -83,7 +83,7 @@
                     <span class="input-group-text" style="border-left: 0; border-radius: 0 10px 10px 0; border-color: #BAC8F3;">.000 VND</span>
                     @error('sale_price')
                     <div class="invalid-feedback">
-                        {{ $message }}
+                        <strong>{{ $message }}</strong>
                     </div>
                     @enderror
                 </div>
@@ -98,7 +98,7 @@
                     </select>
                     @error('is_document')
                     <div class="invalid-feedback">
-                        {{ $message }}
+                        <strong>{{ $message }}</strong>
                     </div>
                     @enderror
                 </div>
@@ -114,20 +114,33 @@
                     </select>
                     @error('status')
                     <div class="invalid-feedback">
-                        {{ $message }}
+                        <strong>{{ $message }}</strong>
                     </div>
                     @enderror
                 </div>
             </div>
-
-            <div class="col-12">
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="">Danh Mục</label>
+                    <div class="list-group list-categories {{ $errors->has('categories') ? 'is-invalid' : '' }}">
+                        {{getCategoriesCheckboxes($categories)}}
+                    </div>
+                    @error('categories')
+                    <div class="invalid-feedback d-block">
+                        <strong>{{ $message }}</strong>
+                    </div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-6">
                 <div class="mb-3">
                     <label for="">Hỗ trợ</label>
                     <textarea name="supports" class="form-control {{ $errors->has('supports') ? 'is-invalid' : '' }}"
+                              style="height: 222px;"
                               placeholder="Hỗ trợ...">{{ old('supports') }}</textarea>
                     @error('supports')
                     <div class="invalid-feedback">
-                        {{ $message }}
+                        <strong>{{ $message }}</strong>
                     </div>
                     @enderror
                 </div>
@@ -140,7 +153,7 @@
                               placeholder="Nội dung...">{{ old('detail') }}</textarea>
                     @error('detail')
                     <div class="invalid-feedback">
-                        {{ $message }}
+                        <strong>{{ $message }}</strong>
                     </div>
                     @enderror
                 </div>
@@ -160,12 +173,9 @@
                             </button>
                             @error('thumbnail')
                             <div class="invalid-feedback">
-                                {{ $message }}
+                                <strong>{{ $message }}</strong>
                             </div>
                             @enderror
-                        </div>
-                        <div class="col-2 d-grid">
-
                         </div>
 {{--                        https://mdbootstrap.com/docs/standard/extended/file-input-image/--}}
                         <div class="col-3">
@@ -197,6 +207,10 @@
 
         #holder img {
             width: 100% !important;
+        }
+        .list-categories{
+            max-height: 222px;
+            overflow: auto;
         }
     </style>
 @endsection
