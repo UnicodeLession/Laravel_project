@@ -32,6 +32,9 @@ class CourseRepository extends BaseRepository implements CourseRepositoryInterfa
     public function updateCourseCategories($course, $data =[]){
         return $course->categories()->sync($data);
     }
+    public function deleteCourseCategories($course){
+        return $course->categories()->detach();
+    }
     public function getRelatedCategories($course){
         $categoryIds = $course->categories()->allRelatedIds()->toArray();
         return $categoryIds;

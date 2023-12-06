@@ -137,6 +137,8 @@ class CourseController extends Controller
 
     public function delete($id)
     {
+        $course = $this->courseRepo->find($id);
+        $this->courseRepo->deleteCourseCategories($course);
         $this->courseRepo->delete($id);
         return back()->with('msg', __('messages.success',
             ['action' => 'Xóa', 'attribute' => 'Khóa Học']))
