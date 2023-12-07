@@ -5,6 +5,7 @@ namespace Modules\Course\src\Http\Controllers;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Modules\Category\src\Repositories\CategoryRepository;
+use Modules\Teacher\src\Repositories\TeacherRepository;
 use Yajra\DataTables\Facades\DataTables;
 use Modules\Course\src\Http\Requests\CourseRequest;
 use Modules\Course\src\Repositories\CourseRepository;
@@ -13,11 +14,18 @@ class CourseController extends Controller
 {
     protected $courseRepo;
     protected $categoryRepo;
+    protected $teacherRepo;
 
-    public function __construct(CourseRepository $courseRepo, CategoryRepository $categoryRepo)
+    public function __construct
+    (
+        CourseRepository $courseRepo,
+        CategoryRepository $categoryRepo,
+        TeacherRepository $teacherRepo
+    )
     {
         $this->courseRepo = $courseRepo;
         $this->categoryRepo =$categoryRepo;
+        $this->teacherRepo = $teacherRepo;
     }
     public function index()
     {
@@ -75,7 +83,8 @@ class CourseController extends Controller
     {
         $pageTitle = 'Thêm Khóa Học';
         $categories = $this->categoryRepo->getAllCategories();
-        return view('course::add', compact('pageTitle', 'categories'));
+        $teachers = $this->teacherRepo->getAllTeachers()->get();
+        return view('course::add', compact('teachers','pageTitle', 'categories'));
     }
 
     public function store(CourseRequest $request)

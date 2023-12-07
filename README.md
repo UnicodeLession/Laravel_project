@@ -6,6 +6,8 @@
 
 ## Khi Clone Project về thì phải tải về [file này](https://www.mediafire.com/file/go1sfwpnepgfmy6/public_backend.zip/file) rồi ném vào public/
 
+## Tìm hiểu khóa ngoại cùng với Delete Cascade trong sql
+
 ## Phân tích cơ bản
 ### Dành cho người dùng:
 - Hiển thị danh sách khóa học
@@ -51,3 +53,14 @@ php artisan make:module Ten_module
 - Phân Trang
 - Thêm, Sửa, Xóa
 
+## Delete Cascade:
+1. Xóa course -> xóa các liên kết bên trong bảng categories_courses ✅
+              -> xóa img của course đó trên server
+2. Xóa category -> xóa các liên kết bên trong bảng categories_courses ❎
+                   xóa các categories con của nó ❎
+3. Xóa teacher -> xóa các courses của teacher đó -> xóa img của teacher đó trên server 
+
+4. Ràng buộc file + ảnh: 
+        -> khi xóa teacher -> xóa ảnh của teacher đó
+        -> khi xóa Course -> xóa ảnh của course đó
+        -> kiểm tra xem ảnh đó có bị sử dụng ở nơi khác không -> nếu có thì không được xóa

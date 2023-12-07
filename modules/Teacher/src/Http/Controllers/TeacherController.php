@@ -25,7 +25,7 @@ class TeacherController extends Controller
 
     public function data()
     {
-        $teacher = $this->teacherRepo->getAllTeacher();
+        $teacher = $this->teacherRepo->getAllTeachers();
 
         $data =  DataTables::of($teacher)
             ->addColumn('edit', function ($teacher) {

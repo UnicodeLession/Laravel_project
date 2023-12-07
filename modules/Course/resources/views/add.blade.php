@@ -39,7 +39,11 @@
                     <select name="teacher_id" id=""
                             class="form-control form-select {{ $errors->has('teacher_id') ? 'is-invalid' : '' }}">
                         <option value="0">Chọn giảng viên</option>
-                        <option value="1">Nguyễn Minh Hiếu</option>
+                        @if($teachers->count())
+                            @foreach($teachers as $teacher)
+                                <option value="{{$teacher->id}}" @if(old('teacher_id') == $teacher->id) {{'selected'}} @endif>{{$teacher->name}}</option>
+                            @endforeach
+                        @endif
                     </select>
                     @error('teacher_id')
                     <div class="invalid-feedback">
