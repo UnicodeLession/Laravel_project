@@ -55,12 +55,20 @@ php artisan make:module Ten_module
 
 ## Delete Cascade:
 1. Xóa course -> xóa các liên kết bên trong bảng categories_courses ✅
-              -> xóa img của course đó trên server
-2. Xóa category -> xóa các liên kết bên trong bảng categories_courses ❎
-                   xóa các categories con của nó ❎
-3. Xóa teacher -> xóa các courses của teacher đó -> xóa img của teacher đó trên server 
 
-4. Ràng buộc file + ảnh: 
-        -> khi xóa teacher -> xóa ảnh của teacher đó
-        -> khi xóa Course -> xóa ảnh của course đó
-        -> kiểm tra xem ảnh đó có bị sử dụng ở nơi khác không -> nếu có thì không được xóa
+2. Xóa category -> xóa các liên kết bên trong bảng categories_courses ✅
+                   xóa các categories con của nó ❎
+3. Xóa teacher -> xóa các courses của teacher đó ✅
+
+___
+4. Ràng buộc file + ảnh: với Course và Teacher
+-> kiểm tra xem ảnh đó có bị sử dụng ở nơi khác không -> nếu có thì không được xóa
+-> nếu xóa thì kiểm tra xem ảnh có được sử dụng ở nơi khác không -> có thì không được xóa
+-> nếu sửa thì cũng phải kiểm tra xem ảnh có được sử dụng ở nơi khác không
+    -> có sử dụng ở nơi khác: chỉ update ảnh mới lên
+    -> không sử dụng ở nơi khác: update ảnh mới + xóa ảnh cũ
+=> hướng giải quyết: tạo một module riêng: Media
+   -> khi chọn ảnh thì render ra pop-up của moudule Media
+   -> khi upload ảnh mới render ra pop-up của laravel-filemanager
+   -> khi ấn vào chọn ảnh thì hiện ra 2 selections là: chọn ảnh trên server và upload ảnh
+__ ĐÃ LÀM: __ Xóa ảnh thì xóa các ảnh trên server

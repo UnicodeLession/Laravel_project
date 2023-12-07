@@ -148,7 +148,10 @@ class CourseController extends Controller
     {
         $course = $this->courseRepo->find($id);
         $this->courseRepo->deleteCourseCategories($course);
-        $this->courseRepo->delete($id);
+        $status = $this->courseRepo->delete($id);
+        if ($status){
+            deleteImageStorage($course->thumbnail);
+        }
         return back()->with('msg', __('messages.success',
             ['action' => 'Xóa', 'attribute' => 'Khóa Học']))
             ->with('type', 'success');

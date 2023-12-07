@@ -1,5 +1,8 @@
 <?php
-function slug( $text )
+
+use Illuminate\Support\Facades\File;
+
+function slug($text )
 {
     $trans = [
         'а' => 'a', 'б' => 'b', 'в' => 'v', 'г' => 'g', 'д' => 'd', 'е' => 'e', 'ё' => 'jo', 'ж' => 'zh', 'з' => 'z', 'и' => 'i', 'й' => 'jj',
@@ -12,4 +15,9 @@ function slug( $text )
     $text  = preg_replace( '/[ _.]+/', '-', trim( $text ) );
     $text  = trim( $text, '-' );
     return $text;
+}
+function deleteImageStorage($img){
+    $imgThumb = dirname($img).'/thumbs/'.basename($img); // do có folder thumbs bên trong server tạo thumb với mỗi file khác nhau
+    File::delete(public_path($img));
+    File::delete(public_path($imgThumb));
 }

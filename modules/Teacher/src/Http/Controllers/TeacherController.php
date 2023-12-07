@@ -96,7 +96,12 @@ class TeacherController extends Controller
 
     public function delete($id)
     {
-        $this->teacherRepo->delete($id);
+        $teacher = $this->teacherRepo->find($id);
+        $status = $this->teacherRepo->delete($id);
+        if ($status){
+            $img = $teacher->image;
+            deleteImageStorage($img);
+        }
         return back()->with('msg', __('messages.success', ['action' => 'Xóa', 'attribute' => 'Giảng Viên']))
             ->with('type', 'success');
     }
