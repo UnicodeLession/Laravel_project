@@ -19,6 +19,7 @@
     <link href="{{asset('backend/css/sb-admin-2.min.css')}}" rel="stylesheet">
     @stack('css')
     @yield('stylesheets')
+    <link rel="stylesheet" href="{{asset('backend/css/style.css')}}">
 </head>
 
 <body id="page-top">
