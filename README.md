@@ -97,7 +97,19 @@ khi đó ứng dụng vẫn chạy bình thường (nếu có lỗi render bản
 
 
 ## Artisan Console:
-### Tạo Mới Controller
+### Tạo Mới Controller : do phần Module của Command đã tạo sẵn Controller Folder rồi nên mới kiểm tra xem có Controller Folder hay không và trả về lỗi
 ```terminal
 php artisan module:make-controller ControllerName ModuleName 
+```
+### Tạo Mới Request : do phần Module của Command chưa tạo sẵn Request Folder nên phải tạo ra khi chạy câu lệnh
+```terminal
+php artisan module:make-request RequestName ModuleName 
+```
+### Tạo Mới Model: Tên Model và tên Module giống nhau ở project này
+```terminal
+php artisan module:make-model ModelName ModuleName 
+```
+### Tạo Mới Middleware
+```terminal
+php artisan module:make-middleware MiddlewareName ModuleName 
 ```
