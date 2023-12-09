@@ -83,11 +83,17 @@ class Module extends Command
             if (!File::exists($routesFolder)) {
                 File::makeDirectory($routesFolder, 0755, true, true);
 
-                //Tạo file routes.php
-                $routesFile = base_path('modules/'.$name.'/routes/routes.php');
-
-                if (!File::exists($routesFile)) {
-                    File::put($routesFile, "<?php \n use Illuminate\Support\Facades\Route;");
+                //Tạo file web.php
+                $routesWebFile = base_path('modules/'.$name.'/routes/web.php');
+                $routeContent = file_get_contents(app_path('Console/Commands/Templates/Route.txt'));
+                $routeContent = str_replace('{module}', strtolower($name), $routeContent);
+                //Tạo file api.php
+                $routesApiFile = base_path('modules/'.$name.'/routes/api.php');
+                if (!File::exists($routesWebFile)) {
+                    File::put($routesWebFile, $routeContent);
+                }
+                if (!File::exists($routesApiFile)) {
+                    File::put($routesApiFile, $routeContent);
                 }
             }
 
