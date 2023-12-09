@@ -72,3 +72,25 @@ ___
    -> khi upload ảnh mới render ra pop-up của laravel-filemanager
    -> khi ấn vào chọn ảnh thì hiện ra 2 selections là: chọn ảnh trên server và upload ảnh
 __ ĐÃ LÀM: __ Xóa ảnh thì xóa các ảnh trên server
+
+## Tối ưu Repository design pattern
+- Nếu muốn thay đổi từ mysql sang mongodb thì phải sửa lại hết repository bên trong các module
+- -> chỉ cần thay đổi bên trong ModuleServiceProvider folder module
+___Ví dụ___
+- với UserRepository là sử dụng mysql và MongoUserRepository là sử dụng mongodb
+- thì chỉ cần tên phương thức của 2 Repository giống nhau và đã được định nghĩa bên trong Interface
+- khi đó chỉ cần vào ModuleServiceProvider: từ
+```php
+$this->app->singleton(
+    UserRepositoryInterface::class,
+    UserRepository::class
+);
+```
+thành
+```php
+$this->app->singleton(
+    UserRepositoryInterface::class,
+    MongoUserRepository::class
+);
+```
+khi đó ứng dụng vẫn chạy bình thường (nếu có lỗi render bản ghi thì có thể vào sửa ModuleServiceProvider singleton thành từng module một thay vì dùng foreach như vậy)

@@ -5,7 +5,6 @@ namespace Modules;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 use Modules\User\src\Commands\TestCommand;
-use Modules\User\src\Repositories\UserRepository;
 use Modules\User\src\Http\Middlewares\DemoMiddleware;
 
 class  ModuleServiceProvider extends ServiceProvider
@@ -43,10 +42,11 @@ class  ModuleServiceProvider extends ServiceProvider
 
         //Commands
         $this->commands($this->commands);
-
-        $this->app->singleton(
-            UserRepository::class
-        );
+        foreach ($this->getModules() as $module) {
+            $interface = "Modules\\{$module}\\src\\Repositories\\{$module}RepositoryInterface";
+            $implementation = "Modules\\{$module}\\src\\Repositories\\{$module}Repository";
+            $this->app->singleton($interface, $implementation);
+        }
     }
 
 

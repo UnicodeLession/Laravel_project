@@ -1,5 +1,5 @@
 <?php
-
+// tối ưu Repository design pattern
 namespace Modules\User\src\Repositories;
 
 use App\Repositories\RepositoryInterface;

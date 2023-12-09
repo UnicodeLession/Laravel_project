@@ -7,7 +7,7 @@ use Modules\User\src\Models\User;
 use App\Repositories\BaseRepository;
 use Modules\User\src\Repositories\UserRepositoryInterface;
 
-class UserRepository extends BaseRepository implements UserRepositoryInterface
+class MongoUserRepository extends BaseRepository implements UserRepositoryInterface
 {
     public function getModel()
     {

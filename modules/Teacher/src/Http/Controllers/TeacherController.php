@@ -6,13 +6,13 @@ use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Yajra\DataTables\Facades\DataTables;
 use Modules\Teacher\src\Http\Requests\TeacherRequest;
-use Modules\Teacher\src\Repositories\TeacherRepository;
+use Modules\Teacher\src\Repositories\TeacherRepositoryInterface;
 
 class TeacherController extends Controller
 {
     protected $teacherRepo;
 
-    public function __construct(TeacherRepository $teacherRepo)
+    public function __construct(TeacherRepositoryInterface $teacherRepo)
     {
         $this->teacherRepo = $teacherRepo;
     }

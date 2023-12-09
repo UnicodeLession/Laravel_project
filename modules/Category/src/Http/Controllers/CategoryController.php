@@ -2,7 +2,7 @@
 
 namespace Modules\Category\src\Http\Controllers;
 
-use Modules\Category\src\Repositories\CategoryRepository;
+use Modules\Category\src\Repositories\CategoryRepositoryInterface;
 use Modules\Category\src\Http\Requests\CategoryRequest;
 use App\Http\Controllers\Controller;
 use Yajra\DataTables\DataTables;
@@ -11,7 +11,7 @@ class CategoryController extends Controller{
 
     protected $categoryRepo;
 
-    public function __construct(CategoryRepository $categoryRepo)
+    public function __construct(CategoryRepositoryInterface $categoryRepo)
     {
         $this->categoryRepo = $categoryRepo;
     }

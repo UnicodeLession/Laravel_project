@@ -4,11 +4,11 @@ namespace Modules\Course\src\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
-use Modules\Category\src\Repositories\CategoryRepository;
-use Modules\Teacher\src\Repositories\TeacherRepository;
+use Modules\Category\src\Repositories\CategoryRepositoryInterface;
+use Modules\Teacher\src\Repositories\TeacherRepositoryInterface;
 use Yajra\DataTables\Facades\DataTables;
 use Modules\Course\src\Http\Requests\CourseRequest;
-use Modules\Course\src\Repositories\CourseRepository;
+use Modules\Course\src\Repositories\CourseRepositoryInterface;
 
 class CourseController extends Controller
 {
@@ -18,9 +18,9 @@ class CourseController extends Controller
 
     public function __construct
     (
-        CourseRepository $courseRepo,
-        CategoryRepository $categoryRepo,
-        TeacherRepository $teacherRepo
+        CourseRepositoryInterface $courseRepo,
+        CategoryRepositoryInterface $categoryRepo,
+        TeacherRepositoryInterface $teacherRepo
     )
     {
         $this->courseRepo = $courseRepo;
