@@ -73,6 +73,15 @@ class  ModuleServiceProvider extends ServiceProvider
                 $this->loadRoutesFrom($modulePath.'/routes/web.php');
             }
         });
+        Route::group([
+            'middleware' => 'api',
+            'namespace' => $namespace,
+            'prefix' => 'api'
+        ],function() use ($modulePath){
+            if (File::exists($modulePath. '/routes/api.php')) {
+                $this->loadRoutesFrom($modulePath.'/routes/api.php');
+            }
+        });
         //Khai báo migrations
         if (File::exists($modulePath. '/migrations')) {
             $this->loadMigrationsFrom($modulePath.'/migrations');
