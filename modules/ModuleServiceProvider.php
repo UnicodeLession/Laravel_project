@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 use Modules\User\src\Commands\TestCommand;
 use Modules\User\src\Http\Middlewares\DemoMiddleware;
+use Illuminate\Support\Facades\Route;
 
 class  ModuleServiceProvider extends ServiceProvider
 {
@@ -59,13 +60,19 @@ class  ModuleServiceProvider extends ServiceProvider
     //registerModule
     private function registerModule($module)
     {
+
         $modulePath = __DIR__."/{$module}";
-
+        $namespace = 'Modules\\'.$module.'\\src\\Http\\Controllers';
         //Khai báo Routes
-        if (File::exists($modulePath. '/routes/routes.php')) {
-            $this->loadRoutesFrom($modulePath.'/routes/routes.php');
-        }
 
+        Route::group([
+            'middleware' => 'web',
+            'namespace' => $namespace
+        ],function() use ($modulePath){
+            if (File::exists($modulePath. '/routes/web.php')) {
+                $this->loadRoutesFrom($modulePath.'/routes/web.php');
+            }
+        });
         //Khai báo migrations
         if (File::exists($modulePath. '/migrations')) {
             $this->loadMigrationsFrom($modulePath.'/migrations');
