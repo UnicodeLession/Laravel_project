@@ -94,3 +94,10 @@ $this->app->singleton(
 );
 ```
 khi đó ứng dụng vẫn chạy bình thường (nếu có lỗi render bản ghi thì có thể vào sửa ModuleServiceProvider singleton thành từng module một thay vì dùng foreach như vậy)
+
+
+## Artisan Console:
+### Tạo Mới Controller
+```terminal
+php artisan module:make-controller ControllerName ModuleName 
+```

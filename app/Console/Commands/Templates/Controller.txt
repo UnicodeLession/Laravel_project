@@ -1,0 +1,23 @@
+<?php
+
+namespace Modules\{module}\src\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use Modules\{module}\src\Models\{module};
+use Modules\{module}\src\Repositories\{module}RepositoryInterface;
+use Modules\{module}\src\Http\Requests\{module}Request;
+
+class {name} extends Controller
+{
+    protected ${module_lowercase}Repo;
+
+    public function __construct({module}RepositoryInterface ${module_lowercase}Repo)
+    {
+        $this->{module_lowercase}Repo = ${module_lowercase}Repo;
+    }
+
+    public function index()
+    {
+        return 'Create A New Controller Successfully';
+    }
+}
