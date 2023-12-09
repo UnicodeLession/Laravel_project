@@ -113,3 +113,15 @@ php artisan module:make-model ModelName ModuleName
 ```terminal
 php artisan module:make-middleware MiddlewareName ModuleName 
 ```
+## Tạo Mới Migration
+```terminal
+php artisan module:make-migration migration_name ModuleName
+```
+## Tạo Mới Seeder
+```terminal
+php artisan module:make-seeder NameSeeder ModuleName
+```
+## Seeding Data
+```terminal
+php artisan module:db-seed NameSeeder ModuleName
+```
