@@ -27,9 +27,13 @@
 
     @include('parts.backend.menu', [
         'name' => 'courses',
-        'title' => 'Bài Học'
+        'title' => 'Khóa Học'
     ])
 
+    @include('parts.backend.menu', [
+        'name' => 'lessons',
+        'title' => 'Bài Học'
+    ])
     <hr class="sidebar-divider d-none d-md-block">
 
     @include('parts.backend.menu', [

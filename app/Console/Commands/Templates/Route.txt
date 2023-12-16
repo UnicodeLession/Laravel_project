@@ -1,6 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('{module}')->name('{module}.')->group(function () {
+Route::prefix('{module}s')->name('{module}s.')->group(function () {
     // Route here
 });

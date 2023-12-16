@@ -113,15 +113,19 @@ php artisan module:make-model ModelName ModuleName
 ```terminal
 php artisan module:make-middleware MiddlewareName ModuleName 
 ```
-## Tạo Mới Migration
+### Tạo Mới Migration
 ```terminal
 php artisan module:make-migration migration_name ModuleName
 ```
-## Tạo Mới Seeder
+### Tạo Mới Seeder
 ```terminal
 php artisan module:make-seeder NameSeeder ModuleName
 ```
-## Seeding Data
+### Seeding Data
 ```terminal
 php artisan module:db-seed NameSeeder ModuleName
 ```
+
+## Khi thêm 1 Module mới:
+1. Vào `resources/views/parts/backend/sidebar.blade.php` thêm 1 menu tương ứng
+2. 
